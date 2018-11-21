@@ -1,3 +1,7 @@
+# encoding=utf8
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 from subprocess import check_call
 import os
 import os.path as op
@@ -37,7 +41,7 @@ def _check_url_page(url_page):
     if any(url_page.startswith(ii) for ii in [CONTENT_FOLDER_NAME, os.sep+CONTENT_FOLDER_NAME]):
         raise ValueError("It looks like you have a page URL that starts with your content folder's name."
                             "page URLs should be *relative* to the content folder. Here is the page URL: {}".format(url_page))
-    
+
 def _prepare_toc(toc):
     """Prepare the TOC for processing."""
     # Drop toc items w/o links
@@ -325,4 +329,3 @@ if __name__ == '__main__':
     print("\nDemo your Jupyter book with `make serve` or push to GitHub!")
 
     print('===========\n')
-
