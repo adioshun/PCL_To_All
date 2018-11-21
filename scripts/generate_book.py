@@ -1,7 +1,7 @@
 # encoding=utf8
 import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+#reload(sys)
+#sys.setdefaultencoding('utf8')
 from subprocess import check_call
 import os
 import os.path as op

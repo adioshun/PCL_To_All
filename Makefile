@@ -8,13 +8,13 @@ help:
 	@echo "  serve       to serve the repository locally with Jekyll"
 
 book:
-	python scripts/generate_book.py
+	python3 scripts/generate_book.py
 
 runall:
-	python scripts/execute_all_notebooks.py
+	python3 scripts/execute_all_notebooks.py
 
 clean:
-	python scripts/clean.py
+	python3 scripts/clean.py
 
 serve:
 	bundle exec guard
