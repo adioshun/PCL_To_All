@@ -12,45 +12,41 @@
 # divider: true if this entry should just be rendered as a horizontal divider
 #   in the sidebar. All other values are ignored.
 
-- title: Home123
+- title: Home
   url: /intro
   not_numbered: true
 
-- title: Features
-  url: /features/features
+- title: PCL
+  url: /features/intro_pcl
   not_numbered: true
   sections:
-  - title: Markdown files
-    url: /features/markdown
+  - title: PCL (Python)
+    url: /features/python-pcl
     not_numbered: true
-  - title: Jupyter notebooks
-    url: /features/notebooks
+  - title: Open3D (Python)
+    url: /features/open3d
     not_numbered: true
 
-- title: Guide
+- title: 환경구성
   url: /guide/01_overview
   not_numbered: true
   sections:
-  - title: Setup and Install
-    url: /guide/02_setup
+  - title: Ubuntu
+    url: /guide/02_ubuntu
     not_numbered: true
-  - title: Configuration
-    url: /guide/03_configure
+  - title: Docker 활용
+    url: /guide/03_docker
     not_numbered: true
-  - title: Build your book
-    url: /guide/04_build
+  - title: ROS
+    url: /guide/04_ros
     not_numbered: true
-  - title: Publish your book
-    url: /guide/05_publish
+  - title: 시각화
+    url: /guide/05_vis
     not_numbered: true
-  - title: FAQ
-    url: /guide/06_faq
-    not_numbered: true
-  - title: Advanced
-    url: /guide/07_advanced
+
 
 - divider: true
-- header: Demo textbook
+- header: People Detection (Basic)
 
 - title: Data Science
   url: /01/what-is-data-science
@@ -102,3 +98,21 @@
     url: /04/2/Strings
   - title: Comparisons
     url: /04/3/Comparison
+
+- divider: true
+- header: People Detection (Intermediate)
+
+- title: Data Science
+  url: /01/what-is-data-science
+  sections:
+  - title: Introduction
+    url: /01/1/intro
+  - title: Why Data Science?
+    url: /01/2/why-data-science
+  - title: Plotting the Classics
+    url: /01/3/Plotting_the_Classics
+    subsections:
+    - title: Subsection Demo 1
+      url: /01/3/subsection/subsections
+    - title: Subsection Demo 2
+      url: /01/3/subsection/subsectiontwo

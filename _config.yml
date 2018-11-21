@@ -23,7 +23,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   This is an example book built with Jupyter Books.
 
 baseurl: "/PCL_For_All" # the subpath of your site, e.g. /blog
-url: "https://hunjung-lim.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 #######################################################################################
 # Jupyter Book settings
