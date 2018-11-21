@@ -18,12 +18,12 @@
 # Jekyll site settings
 title: Jupyter Books
 author: Samuel Lau and Deborah Nolan and Chris Holdgraf
-email: samlau95@berkeley.edu
+email: hunjung.lim@hotmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   This is an example book built with Jupyter Books.
 
-baseurl: "/jupyter-book" # the subpath of your site, e.g. /blog
-url: "https://predictablynoisy.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/PCL_For_All" # the subpath of your site, e.g. /blog
+url: "https://hunjung-lim.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 #######################################################################################
 # Jupyter Book settings
