@@ -1,3 +1,15 @@
+---
+redirect_from:
+  - "/02/2/snow-s-grand-experiment"
+title: 'Snow’s “Grand Experiment”'
+prev_page:
+  url: /02/1/observation-and-visualization-john-snow-and-the-broad-street-pump
+  title: 'John Snow and the Broad Street Pump'
+next_page:
+  url: /02/3/establishing-causality
+  title: 'Establishing Causality'
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
 Snow’s “Grand Experiment”
 -------------------------
 
@@ -10,7 +22,7 @@ River Thames. Its water was relatively clean. But the Southwark and Vauxhall
 contaminated.
 
 The map below shows the areas served by the two companies. Snow honed in on the region where the two service areas overlap.
-![Snow’s Other Map](../../../images/snow_map2.jpg)
+![Snow’s Other Map](../../images/snow_map2.jpg)
 
 Snow noticed that there was no systematic difference between the people who were
 supplied by S&V and those supplied by Lambeth. “Each company supplies both rich

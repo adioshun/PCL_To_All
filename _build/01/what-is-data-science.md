@@ -3,8 +3,8 @@ redirect_from:
   - "/01/what-is-data-science"
 title: 'Data Science'
 prev_page:
-  url: /guide/07_advanced
-  title: 'Advanced'
+  url: /guide/05_vis
+  title: '시각화'
 next_page:
   url: /01/1/intro
   title: 'Introduction'

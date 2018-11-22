@@ -5,105 +5,83 @@
 PCL은 `Point cloud Library`의 약어로 Lidar나 RGB-D센서 등으로 수집되는 점군(Point cloud)를 처리 하기 위한 라이브러리 입니다.
 
 Point cloud를 처리를 위한 라이브러리는 여러 종류가 있습니다.
+
 - PCL
 - PCL-python
 - Open3D
 - pyPCD, Laspy, PCLpy, etc.
 
-## 환경
+> 여기서는 PCL-Python과 일부 Open3D를 활용합니다. 
+
+## Environment
 
 - 언어: python2
 - 라이브러리 : PCL-Python (PCL의 python버젼인)
 - OS : Ubuntu 16.4 with (Optional) ROS
 - 센서 : Velodyne Puck (16ch Lidar)
 
-## 미니 프로젝트  
+## Mini Project
 
 진행은 Lidar로 수집되는 점군 데이터에서 사람을 추출 하는 3D People Detection 구현을 목표로 하고 있습니다.
 
-|![](lobby_demo.gif)|![](office_demo.gif)|
-|-|-|
-|People Detection (초급)|People Detection & Tracking (중급)|
-|- 대상 환경 : 사람외 사물이 없는 공간(eg. 로비)<br>- 주요 기술 : 필터링, 바닥제거, 노이즈제거, 클러스터링|- 대상 환경 : 사람과 사물이 공존하는 공간(eg. 사무실)<br>- 주요 기술 : 초급 기술 + 배경제거, 추적|
+
+### [초급] People Detection
+
+![](lobby_demo.gif)
+
+- 대상 환경 : 사람외 사물이 없는 공간(eg. 로비)
+
+- 주요 기술 : 필터링, 바닥제거, 노이즈제거, 클러스터링
+
+  - 1.1 Down Sampling : Voxelization,
+  - 1.2 RoI Filtering : passthrough filter, conditional filter
+  - 1.3 Noise Filtering : Statistical filtering, Radius Filtering
+  - 1.4 Plane Removal : RANSAC segmentation
+  - 1.5 Clustering
+
+### [중급] People Detection and Tracking
+
+![](office_demo.gif)
+
+- 대상 환경 : 사람과 사물이 공존하는 공간(eg. 사무실)
+- 주요 기술 : 초급 기술 + 배경제거, 추적
+
+  - 2.1 Background Removal :  Octree based
+  - 2.2 Clustering
+  - 2.3 Tracking
+
+### [고급] People Detection and Tracking with Deeplearning
+- End-to-End (딥러닝 으로 가능할까??)
+
+## Plan
 
 
-## 작성 계획
-
-Home
-- 0.1 PCL
-  - 0.1.1 PCL(python)
-  - 0.1.2 Open3D(python)
-- 0.2 환경구축
-
-People Detection (초급)
-- 1.1 Down Sampling
-  - Voxelization
-- 1.2 RoI Filtering
-  - passthrough filter
-  - conditional filter
-- 1.3 Noise Filtering
-  - Statistical filtering
-  - Radius Filtering
-- 1.4 Plane Removal
-  - RANSAC segmentation
-- 1.5 Clustering
-
-
-People Detection and Tracking (중급))
-
-- 2.1 Background Removal
-  - Octree based
-- 2.2 Clustering
-- 2.3 Tracking
-
-People Detection and Tracking with Deeplearning (고급)
-- *2019년 중/후반 예정 *
 
 |            | 초급                | 중급                   | 고급               |
-|:----------:|---------------------|------------------------|--------------------|
+|:----------:|:---------------------|:------------------------|:--------------------|
 | 2018.11.22 | 0.2 환경구축        |                        |                    |
-|            | 0.1.1 PCL(Python)   |                        |                    |
-|            | 1.1 Down Sampling   |                        |                    |
-|            | 1.2 ROI Filtering   |                        |                    |
-|            | 1.3 Noise Filtering |                        |                    |
-|            | 1.4 Plane Removal   |                        |                    |
-|            | 1.5 Clustering      |                        |                    |
-|            |                     | 2.1 Background Removal |                    |
-|            |                     | 2.2 Clustering         |                    |
-|            |                     | 2.3 Tracking           |                    |
-|            |                     |                        | 3.1 Clustering     |
-|            |                     |                        | 3.2 Classification |
-|            |                     |                        | 3.3 Tracking       |
+| 2018.11.22 | 0.1.1 PCL(Python)   |                        |                    |
+| 2018.11.23 | 1.1 Down Sampling   |                        |                    |
+| 2018.11.23 | 1.2 ROI Filtering   |                        |                    |
+| 2018.11.29 | 1.3 Noise Filtering |                        |                    |
+| 2018.11.29 | 1.4 Plane Removal   |                        |                    |
+| 2018.11.30 | 1.5 Clustering      |                        |                    |
+| 2018.12.03 |                     | 2.1 Background Removal |                    |
+| 2018.12.04 |                     | 2.2 Clustering         |                    |
+| 2018.12.05 |                     | 2.3 Tracking           |                    |
+| 2019.03.01 |                     |                        | 3.1 Clustering     |
+| 2019.04.01 |                     |                        | 3.2 Classification |
+| 2019.05.01 |                     |                        | 3.3 Tracking       |
 
 > Clustering, Tracking, Classification은 PCL보다는 AI쪽 기술이어서 포함 할지 고민중입니다.
 
-## 참고 자료
+## References
 
 정리 내용은 기본적으로는 [PCL홈페이지](http://www.pointclouds.org)의 Documentation-[Tutorial](http://www.pointclouds.org/documentation/tutorials/)에 있는 내용을 기반으로 하고 있습니다.
 
 부분적으로 PCL홈페이지의 [Media](http://www.pointclouds.org/media/)에 있는 각 컨퍼런스 발표 자료를 참고 하였습니다.
 
-- RSS2011
-- IROS2011
-- ICCV2011
-- ICRA2012
-- CRV2012
-- CVPR2012
-- IROS2012
-- ICRA2013
-- CGLIBS13
-- IAS2014
-- 3DRP-PCL2014
-
 부분적으로 [라온피플 블로그](https://blog.naver.com/PostList.nhn?blogId=laonple&from=postList&categoryNo=41#) 자료를 참고 하고 있습니다.
-- 포인트 클라우드란?
-- 포인트 클라우드 뽀샵처리 (필터링)
-- 포인트 클라우드에서 물체 특이형상 찾기
-- 포인트 클라우드에서 물체 고유의 특징점이란?
-- 포인트 클라우드에서 누가 누가 빠른가(1) kdtree
-- 포인트 클라우드에서 누가 누가 빠른가(2) octree
-- 포인트 클라우드 분할
-
 
 부분적으로 [PCL/OpenNI](http://robotica.unileon.es/index.php/PhD-3D-Object-Tracking) 자료를 참고 하고 있습니다.
 - PCL/OpenNI tutorial 2: Cloud processing (basic)
@@ -116,3 +94,9 @@ People Detection and Tracking with Deeplearning (고급)
 - def do_passthrough(pcl_data,filter_axis,axis_min,axis_max):
 
 추가적으로 cpp기반 Sample Code 및 Tutorial을 보려면 [[이곳]](https://github.com/UnaNancyOwen/Tutorials)을 추천 합니다.
+
+## Acknowledgements
+
+Chris Holdgraf의 [Books with Jupyter and Jekyll](https://predictablynoisy.com/jupyter-book/intro.html)을 활용하여 구성 하였습니다.
+
+김성훈 교수님의 [모두를 위한 딥러닝 강의](https://hunkim.github.io/ml/)에 고마움을 느껴 정리 하게 되었습니다.

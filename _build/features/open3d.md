@@ -4,7 +4,7 @@ redirect_from:
 interact_link: content/features/open3d.ipynb
 title: 'Open3D (Python)'
 prev_page:
-  url: /features/markdown
+  url: /features/python-pcl
   title: 'PCL (Python)'
 next_page:
   url: /guide/01_overview

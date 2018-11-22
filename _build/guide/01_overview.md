@@ -1,13 +1,13 @@
 ---
 redirect_from:
   - "/guide/01-overview"
-title: 'Guide'
+title: '환경구성'
 prev_page:
-  url: /features/notebooks
-  title: 'Jupyter notebooks'
+  url: /features/open3d
+  title: 'Open3D (Python)'
 next_page:
-  url: /guide/02_setup
-  title: 'Setup and Install'
+  url: /guide/02_ubuntu
+  title: 'Ubuntu'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 # The Jupyter Books Guide
