@@ -116,3 +116,18 @@
       url: /01/3/subsection/subsections
     - title: Subsection Demo 2
       url: /01/3/subsection/subsectiontwo
+
+- divider: true
+- header: etc.
+
+- title: 참고 자료
+  url: /references/references
+  not_numbered: true
+
+- title: 의견 / QnA
+  url: https://github.com/hunjung-lim/3D_People_Detection_Tracking/issues
+  not_numbered: true
+
+- title: Github
+  url: https://github.com/hunjung-lim/3D_People_Detection_Tracking
+  not_numbered: true
