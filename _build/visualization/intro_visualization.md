@@ -3,7 +3,7 @@ redirect_from:
   - "/visualization/intro-visualization"
 title: '시각화'
 prev_page:
-  url: /04/1/Numbers
+  url: /04/1/PassThrough_filter
   title: 'Numbers'
 next_page:
   url: /visualization/viz_jupyter

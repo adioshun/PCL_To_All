@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Home</title>
+  <meta name="description" content="PCL 정리 노트">
+
+  <link rel="canonical" href="/PCL_To_All/PCL_To_All/intro.html">
+  <link rel="alternate" type="application/rss+xml" title="PCL 정리노트" href="/PCL_To_All/PCL_To_All/feed.xml">
+
+  <meta property="og:url"         content="/PCL_To_All/PCL_To_All/intro.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Home" />
+<meta property="og:description" content="PCL 정리 노트" />
+<meta property="og:image"       content="" />
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage":
+    "/PCL_To_All/intro.html",
+  "headline":
+    "Home",
+  "datePublished":
+    "2018-11-23T00:26:54-08:00",
+  "dateModified":
+    "2018-11-23T00:26:54-08:00",
+  "description":
+    "PCL 정리 노트",
+  "author": {
+    "@type": "Person",
+    "name": "Hunjung, Lim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/PCL_To_All",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/PCL_To_All",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/PCL_To_All/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/PCL_To_All/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    CommonHTML: {
+        linebreaks: {
+            automatic: true,
+        },
+    },
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+</script>
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="/PCL_To_All/assets/js/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Load nbinteract for widgets -->
+  <script src="https://unpkg.com/nbinteract-core" async></script>
+
+  <!-- Google analytics -->
+  <script src="/PCL_To_All/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/PCL_To_All/assets/js/scripts.js" async></script>
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  <script>
+/**
+  * To auto-embed hub URLs in interact links if given in a RESTful fashion
+ */
+
+function getJsonFromUrl(url) {
+  var query = url.split('?');
+  if (query.length < 2) {
+    // No queries so just return false
+    return false;
+  }
+  query = query[1];
+  // Collect REST params into a dictionary
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+    
+function dict2param(dict) {
+    params = Object.keys(dict).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(dict[k])
+    });
+    return params.join('&')
+}
+
+// Parse a Binder URL, converting it to the string needed for JupyterHub
+function binder2Jupyterhub(url) {
+  newUrl = {};
+  parts = url.split('v2/gh/')[1];
+  // Grab the base repo information
+  repoinfo = parts.split('?')[0];
+  var [org, repo, ref] = repoinfo.split('/');
+  newUrl['repo'] = ['https://github.com', org, repo].join('/');
+  newUrl['branch'] = ref
+  // Grab extra parameters passed
+  params = getJsonFromUrl(url);
+  if (params['filepath'] !== undefined) {
+    newUrl['subPath'] = params['filepath']
+  }
+  return dict2param(newUrl);
+}
+
+// Filter out potentially unsafe characters to prevent xss
+function safeUrl(url)
+{
+   return String(encodeURIComponent(url))
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
+function addParamToInternalLinks(hub) {
+  var links = document.querySelectorAll("a").forEach(function(link) {
+    var href = link.href;
+    // If the link is an internal link...
+    if (href.search("") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
+      // Assume we're an internal link, add the hub param to it
+      var params = getJsonFromUrl(href);
+      if (params !== false) {
+        // We have REST params, so append a new one
+        params['hub'] = hub;
+      } else {
+        // Create the REST params
+        params = {'hub': hub};
+      }
+      // Update the link
+      var newHref = href.split('?')[0] + '?' + dict2param(params);
+      link.setAttribute('href', decodeURIComponent(newHref));
+    }
+  });
+  return false;
+}
+
+// Update interact links
+function updateInteractLink() {
+    // hack to make this work since it expects a ? in the URL
+    rest = getJsonFromUrl("?" + location.search.substr(1));
+    hubUrl = rest['hub'];
+    if (hubUrl !== undefined) {
+      // Sanitize the hubUrl
+      hubUrl = safeUrl(hubUrl);
+      // Add HTTP text if omitted
+      if (hubUrl.indexOf('http') < 0) {hubUrl = 'http://' + hubUrl;}
+      link = document.querySelectorAll("a.interact-button")[0];
+      if (link !== undefined) {
+          // Update the interact link URL
+          var href = link.getAttribute('href');
+          var hub_type = 'binder';
+          if (hub_type === 'binder') {
+            // If binder links exist, we need to re-work them for jupyterhub
+            if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+              // If localhost, assume we're working from a local Jupyter server and remove `/hub`
+              first = [hubUrl, 'git-sync'].join('/')
+            } else {
+              first = [hubUrl, 'hub', 'user-redirect', 'git-sync'].join('/')
+            }
+            href = first + '?' + binder2Jupyterhub(href);
+          } else {
+            // If JupyterHub links, we only need to replace the hub url
+            href = href.replace("https://mybinder.org", hubUrl);
+            if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+              // Assume we're working from a local Jupyter server and remove `/hub`
+              href = href.replace("/hub/user-redirect", "");
+            }
+          }
+          link.setAttribute('href', decodeURIComponent(href));
+
+          // Add text after interact link saying where we're launching
+          hubUrlNoHttp = decodeURIComponent(hubUrl).replace('http://', '').replace('https://', '');
+          document.querySelectorAll("a.interact-button")[0].insertAdjacentHTML('afterend', '<div class="interact-context">on ' + hubUrlNoHttp + '</div>');
+      }
+      // Update internal links so we retain the hub url
+      addParamToInternalLinks(hubUrl);
+    }
+}
+
+runWhenDOMLoaded(updateInteractLink)
+document.addEventListener('turbolinks:load', updateInteractLink)
+</script>
+</head>
+
+  <body>
+    <!-- Show sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <img src="/PCL_To_All/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/>
+  <h2 class="c-sidebar__title">PCL 정리노트</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry c-sidebar__entry--active"
+          href="/PCL_To_All/intro"
+        >
+          
+          Home
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/features/intro_pcl"
+        >
+          
+          PCL
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/features/python-pcl"
+                >
+                  
+                  PCL (Python)
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/features/open3d"
+                >
+                  
+                  Open3D (Python)
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/features/pypcd"
+                >
+                  
+                  PyPCD (Python)
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/guide/01_overview"
+        >
+          
+          환경구성
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/guide/02_ubuntu"
+                >
+                  
+                  Ubuntu
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/guide/03_docker"
+                >
+                  
+                  Docker 활용
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/guide/04_ros"
+                >
+                  
+                  ROS
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">People Detection (Basic)</li>
+        
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/01/intro_downsampling"
+        >
+          
+            1.
+          
+          Down Sampling
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/01/1/voxelization"
+                >
+                  
+                    1.1
+                  
+                  Voxelization
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/02/intro_filtering"
+        >
+          
+            2.
+          
+          RoI Filtering
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/02/2/conditional_filter"
+                >
+                  
+                    2.1
+                  
+                  Conditional filter
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/03/intro_noise"
+        >
+          
+            3.
+          
+          Noise(=Outlier) Filtering
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/03/2/radius_filter"
+                >
+                  
+                    3.1
+                  
+                  Radius Outlier filter
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/04/intro_Plane_removal"
+        >
+          
+            4.
+          
+          Plane Removal
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/04/1/PassThrough_filter"
+                >
+                  
+                    4.1
+                  
+                  Numbers
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">People Detection (Intermediate)</li>
+        
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">etc.</li>
+        
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/visualization/intro_visualization"
+        >
+          
+          시각화
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/visualization/viz_jupyter"
+                >
+                  
+                  Jupyter 기반
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/references/references"
+        >
+          
+          References
+        </a>
+
+        
+      </li>
+
+      
+    
+  </ul>
+</nav>
+
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="o-wrapper c-sidebar-toggle">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <button
+    id="js-sidebar-toggle"
+    class="hamburger hamburger--arrowalt is-active"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+    <span class="c-sidebar-toggle__label">Toggle Sidebar</span>
+  </button>
+</div>
+
+        <div class="o-wrapper">
+          <!-- INTERACT LINKS -->
+
+
+          <!-- Shamelessly copied from minimal mistakes -->
+
+
+<!-- TOC will only show up if it has at least one item -->
+
+
+  <aside class="sidebar__right">
+    <nav class="onthispage">
+      <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+      <ul class="toc__menu">
+  <li><a href="#environment">Environment</a></li>
+  <li><a href="#mini-project">Mini Project</a></li>
+  <li><a href="#plan">Plan</a></li>
+</ul>
+    </nav>
+  </aside>
+
+
+          <h1 id="pcl-정리-노트">PCL 정리 노트</h1>
+
+<p>그동안 살펴 보았던 PCL 사용 및 활용에 대하여 정리 하고자 합니다.</p>
+
+<p>PCL은 <code class="highlighter-rouge">Point cloud Library</code>의 약어로 Lidar나 RGB-D센서 등으로 수집되는 점군(Point cloud)를 처리 하기 위한 라이브러리 입니다.</p>
+
+<p>Point cloud를 처리를 위한 라이브러리로는 PCL, PCL-python, Open3D, pyPCD, Laspy, PCLpy 등이 있습니다.</p>
+
+<p>여기서는 PCL-Python과 일부 Open3D를 활용합니다.</p>
+
+<h2 id="environment">Environment</h2>
+
+<ul>
+  <li>언어: python2</li>
+  <li>라이브러리 : PCL-Python (PCL의 python버젼인)</li>
+  <li>OS : Ubuntu 16.4 with ROS</li>
+  <li>센서 : Velodyne Puck (16ch Lidar)</li>
+</ul>
+
+<blockquote>
+  <p><a href="https://hub.docker.com/r/adioshun/pcl_to_all/">PCL-To-All Docker</a> : Ubuntu 16, ROS, PCL-python, Open3D, Jupyter, etc. 설치</p>
+</blockquote>
+
+<h2 id="mini-project">Mini Project</h2>
+
+<p>진행은 Lidar로 수집되는 점군 데이터에서 사람을 추출 하는 3D People Detection 구현을 목표로 하고 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><img src="lobby_demo.gif" alt="" /></th>
+      <th><img src="office_demo.gif" alt="" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[초급] People Detection</td>
+      <td>[중급] People Detection and Tracking</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[초급] People Detection</p>
+<ul>
+  <li>대상 환경 : 사람외 사물이 없는 공간(eg. 로비)</li>
+  <li>주요 기술 : 필터링, 바닥제거, 노이즈제거, 클러스터링</li>
+</ul>
+
+<p>[중급] People Detection and Tracking</p>
+<ul>
+  <li>대상 환경 : 사람과 사물이 공존하는 공간(eg. 사무실)</li>
+  <li>주요 기술 : 초급 기술 + 배경제거, 추적</li>
+</ul>
+
+<p>[고급] People Detection and Tracking with Deeplearning</p>
+<ul>
+  <li>End-to-End (딥러닝 으로 가능할까??)</li>
+</ul>
+
+<h2 id="plan">Plan</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th>초급</th>
+      <th>중급</th>
+      <th>고급</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2018.11.22</td>
+      <td>0.1 <del>Home/PCL</del></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.11.22</td>
+      <td>0.2 환경구축</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.11.23</td>
+      <td>1.1 Down Sampling</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.11.23</td>
+      <td>1.2 ROI Filtering</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.11.29</td>
+      <td>1.3 Noise Filtering</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.11.29</td>
+      <td>1.4 Plane Removal</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.11.30</td>
+      <td>1.5 Clustering</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.12.03</td>
+      <td> </td>
+      <td>2.1 Background Removal</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.12.04</td>
+      <td> </td>
+      <td>2.2 Clustering</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2018.12.05</td>
+      <td> </td>
+      <td>2.3 Tracking</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2019.03.01</td>
+      <td> </td>
+      <td> </td>
+      <td>3.1 Clustering</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2019.04.01</td>
+      <td> </td>
+      <td> </td>
+      <td>3.2 Classification</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2019.05.01</td>
+      <td> </td>
+      <td> </td>
+      <td>3.3 Tracking</td>
+    </tr>
+  </tbody>
+</table>
+
+
+          <nav class="c-page__nav">
+  
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="">
+      〈 <span class="u-margin-right-tiny"></span> 
+    </a>
+  
+
+  
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/PCL_To_All/features/intro_pcl">
+      PCL <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        </div>
+      </main>
+    </div>
+
+  </body>
+</html>

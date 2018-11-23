@@ -61,20 +61,27 @@
   sections:
   - title: PassThrough filter
     url: /02/1/PassThrough_filter
+  sections:
+  - title: Conditional filter
+    url: /02/2/conditional_filter
 
 
-- title: Noise Filtering
+
+- title: Noise(=Outlier) Filtering
   url: /03/intro_noise
   sections:
-  - title: Expressions
-    url: /03/1/Expressions
+  - title: Statistical Outlier filter
+    url: /03/1/Statistical_filter
+  sections:
+  - title: Radius Outlier filter
+    url: /03/2/radius_filter
 
 
 - title: Plane Removal
   url: /04/intro_Plane_removal
   sections:
   - title: Numbers
-    url: /04/1/Numbers
+    url: /04/1/PassThrough_filter
 
 
 - divider: true

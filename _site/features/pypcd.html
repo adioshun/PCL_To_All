@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>PyPCD (Python)</title>
+  <meta name="description" content="PyPCD  본 챕터에서는 pypcd의 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다.">
+
+  <link rel="canonical" href="/PCL_To_All/PCL_To_All/features/pypcd.html">
+  <link rel="alternate" type="application/rss+xml" title="PCL 정리노트" href="/PCL_To_All/PCL_To_All/feed.xml">
+
+  <meta property="og:url"         content="/PCL_To_All/PCL_To_All/features/pypcd.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="PyPCD (Python)" />
+<meta property="og:description" content="PyPCD  본 챕터에서는 pypcd의 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다." />
+<meta property="og:image"       content="" />
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage":
+    "/PCL_To_All/features/pypcd.html",
+  "headline":
+    "PyPCD (Python)",
+  "datePublished":
+    "2018-11-23T00:26:54-08:00",
+  "dateModified":
+    "2018-11-23T00:26:54-08:00",
+  "description":
+    "PyPCD  본 챕터에서는 pypcd의 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다.",
+  "author": {
+    "@type": "Person",
+    "name": "Hunjung, Lim"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/PCL_To_All",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/PCL_To_All",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/PCL_To_All/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/PCL_To_All/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    CommonHTML: {
+        linebreaks: {
+            automatic: true,
+        },
+    },
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+</script>
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="/PCL_To_All/assets/js/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Load nbinteract for widgets -->
+  <script src="https://unpkg.com/nbinteract-core" async></script>
+
+  <!-- Google analytics -->
+  <script src="/PCL_To_All/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/PCL_To_All/assets/js/scripts.js" async></script>
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  <script>
+/**
+  * To auto-embed hub URLs in interact links if given in a RESTful fashion
+ */
+
+function getJsonFromUrl(url) {
+  var query = url.split('?');
+  if (query.length < 2) {
+    // No queries so just return false
+    return false;
+  }
+  query = query[1];
+  // Collect REST params into a dictionary
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+    
+function dict2param(dict) {
+    params = Object.keys(dict).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(dict[k])
+    });
+    return params.join('&')
+}
+
+// Parse a Binder URL, converting it to the string needed for JupyterHub
+function binder2Jupyterhub(url) {
+  newUrl = {};
+  parts = url.split('v2/gh/')[1];
+  // Grab the base repo information
+  repoinfo = parts.split('?')[0];
+  var [org, repo, ref] = repoinfo.split('/');
+  newUrl['repo'] = ['https://github.com', org, repo].join('/');
+  newUrl['branch'] = ref
+  // Grab extra parameters passed
+  params = getJsonFromUrl(url);
+  if (params['filepath'] !== undefined) {
+    newUrl['subPath'] = params['filepath']
+  }
+  return dict2param(newUrl);
+}
+
+// Filter out potentially unsafe characters to prevent xss
+function safeUrl(url)
+{
+   return String(encodeURIComponent(url))
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
+function addParamToInternalLinks(hub) {
+  var links = document.querySelectorAll("a").forEach(function(link) {
+    var href = link.href;
+    // If the link is an internal link...
+    if (href.search("") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
+      // Assume we're an internal link, add the hub param to it
+      var params = getJsonFromUrl(href);
+      if (params !== false) {
+        // We have REST params, so append a new one
+        params['hub'] = hub;
+      } else {
+        // Create the REST params
+        params = {'hub': hub};
+      }
+      // Update the link
+      var newHref = href.split('?')[0] + '?' + dict2param(params);
+      link.setAttribute('href', decodeURIComponent(newHref));
+    }
+  });
+  return false;
+}
+
+// Update interact links
+function updateInteractLink() {
+    // hack to make this work since it expects a ? in the URL
+    rest = getJsonFromUrl("?" + location.search.substr(1));
+    hubUrl = rest['hub'];
+    if (hubUrl !== undefined) {
+      // Sanitize the hubUrl
+      hubUrl = safeUrl(hubUrl);
+      // Add HTTP text if omitted
+      if (hubUrl.indexOf('http') < 0) {hubUrl = 'http://' + hubUrl;}
+      link = document.querySelectorAll("a.interact-button")[0];
+      if (link !== undefined) {
+          // Update the interact link URL
+          var href = link.getAttribute('href');
+          var hub_type = 'binder';
+          if (hub_type === 'binder') {
+            // If binder links exist, we need to re-work them for jupyterhub
+            if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+              // If localhost, assume we're working from a local Jupyter server and remove `/hub`
+              first = [hubUrl, 'git-sync'].join('/')
+            } else {
+              first = [hubUrl, 'hub', 'user-redirect', 'git-sync'].join('/')
+            }
+            href = first + '?' + binder2Jupyterhub(href);
+          } else {
+            // If JupyterHub links, we only need to replace the hub url
+            href = href.replace("https://mybinder.org", hubUrl);
+            if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+              // Assume we're working from a local Jupyter server and remove `/hub`
+              href = href.replace("/hub/user-redirect", "");
+            }
+          }
+          link.setAttribute('href', decodeURIComponent(href));
+
+          // Add text after interact link saying where we're launching
+          hubUrlNoHttp = decodeURIComponent(hubUrl).replace('http://', '').replace('https://', '');
+          document.querySelectorAll("a.interact-button")[0].insertAdjacentHTML('afterend', '<div class="interact-context">on ' + hubUrlNoHttp + '</div>');
+      }
+      // Update internal links so we retain the hub url
+      addParamToInternalLinks(hubUrl);
+    }
+}
+
+runWhenDOMLoaded(updateInteractLink)
+document.addEventListener('turbolinks:load', updateInteractLink)
+</script>
+</head>
+
+  <body>
+    <!-- Show sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <img src="/PCL_To_All/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/>
+  <h2 class="c-sidebar__title">PCL 정리노트</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/intro"
+        >
+          
+          Home
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/features/intro_pcl"
+        >
+          
+          PCL
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/features/python-pcl"
+                >
+                  
+                  PCL (Python)
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/features/open3d"
+                >
+                  
+                  Open3D (Python)
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/PCL_To_All/features/pypcd"
+                >
+                  
+                  PyPCD (Python)
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/guide/01_overview"
+        >
+          
+          환경구성
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/guide/02_ubuntu"
+                >
+                  
+                  Ubuntu
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/guide/03_docker"
+                >
+                  
+                  Docker 활용
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/guide/04_ros"
+                >
+                  
+                  ROS
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">People Detection (Basic)</li>
+        
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/01/intro_downsampling"
+        >
+          
+            1.
+          
+          Down Sampling
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/01/1/voxelization"
+                >
+                  
+                    1.1
+                  
+                  Voxelization
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/02/intro_filtering"
+        >
+          
+            2.
+          
+          RoI Filtering
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/02/2/conditional_filter"
+                >
+                  
+                    2.1
+                  
+                  Conditional filter
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/03/intro_noise"
+        >
+          
+            3.
+          
+          Noise(=Outlier) Filtering
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/03/2/radius_filter"
+                >
+                  
+                    3.1
+                  
+                  Radius Outlier filter
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/04/intro_Plane_removal"
+        >
+          
+            4.
+          
+          Plane Removal
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/04/1/PassThrough_filter"
+                >
+                  
+                    4.1
+                  
+                  Numbers
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">People Detection (Intermediate)</li>
+        
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">etc.</li>
+        
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/visualization/intro_visualization"
+        >
+          
+          시각화
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/PCL_To_All/visualization/viz_jupyter"
+                >
+                  
+                  Jupyter 기반
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/PCL_To_All/references/references"
+        >
+          
+          References
+        </a>
+
+        
+      </li>
+
+      
+    
+  </ul>
+</nav>
+
+
+      <main class="c-textbook__page" tabindex="-1">
+        <div class="o-wrapper c-sidebar-toggle">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <button
+    id="js-sidebar-toggle"
+    class="hamburger hamburger--arrowalt is-active"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+    <span class="c-sidebar-toggle__label">Toggle Sidebar</span>
+  </button>
+</div>
+
+        <div class="o-wrapper">
+          <!-- INTERACT LINKS -->
+
+    
+    
+    <div class="buttons">
+        <a class="interact-button" href="https://mybinder.org/v2/gh/choldgraf/jupyter-book/master?filepath=content%2Ffeatures%2Fpypcd.ipynb">Interact</a>
+    </div>
+
+
+          <!-- Shamelessly copied from minimal mistakes -->
+
+
+<!-- TOC will only show up if it has at least one item -->
+
+
+  <aside class="sidebar__right">
+    <nav class="onthispage">
+      <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+      <ul class="toc__menu">
+  <li><a href="#pypcd">PyPCD</a></li>
+  <li><a href="#array로-변경">array로 변경</a></li>
+  <li><a href="#after-decode-tool">After decode Tool</a></li>
+  <li><a href="#2d-시각화">2D 시각화</a></li>
+</ul>
+    </nav>
+  </aside>
+
+
+          <h2 id="pypcd">PyPCD</h2>
+<ul>
+  <li>
+    <p>본 챕터에서는 <a href="https://github.com/dimatura/pypcd">pypcd</a>의 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다.</p>
+  </li>
+  <li>pypcd는 <strong>Point Cloud Library</strong>에 기반한 PCD파일 읽기/쓰기가 가능한 Pure Python module 입니다.</li>
+  <li>특징으로는 ROS 메시지 전송을 지원 합니다.</li>
+</ul>
+
+<blockquote>
+  <p><a href="https://hub.docker.com/r/adioshun/pcl_to_all/">PCL-To-All Docker</a>에는 설치 되어 있지 않습니다.</p>
+</blockquote>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">watermark</span>
+<span class="o">%</span><span class="n">watermark</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">p</span> <span class="n">pypcd</span>
+</code></pre></div></div>
+
+<div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2018-11-23 
+
+CPython 2.7.12
+IPython 5.8.0
+
+pypcd 0.1.1
+
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="err">!</span><span class="p">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">}</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">pypcd</span>
+</code></pre></div></div>
+
+<div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Requirement already satisfied: pypcd in /usr/local/lib/python2.7/dist-packages
+Requirement already satisfied: python-lzf in /usr/local/lib/python2.7/dist-packages (from pypcd)
+Requirement already satisfied: numpy in /usr/local/lib/python2.7/dist-packages (from pypcd)
+[33mYou are using pip version 9.0.1, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.[0m
+
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pypcd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">"/workspace/3D_People_Detection_Tracking"</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cloud</span> <span class="o">=</span> <span class="n">pypcd</span><span class="o">.</span><span class="n">PointCloud</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="s">'./sample/lobby.pcd'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ValueError                                Traceback (most recent call last)
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ipython-input-2-94c291a77ae6&gt; in &lt;module&gt;()
+----&gt; 1 cloud = pypcd.PointCloud.from_path('./sample/lobby.pcd')
+
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/dist-packages/pypcd/pypcd.pyc in from_path(fname)
+    733     @staticmethod
+    734     def from_path(fname):
+--&gt; 735         return point_cloud_from_path(fname)
+    736 
+    737     @staticmethod
+
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/dist-packages/pypcd/pypcd.pyc in point_cloud_from_path(fname)
+    300     """
+    301     with open(fname, 'rb') as f:
+--&gt; 302         pc = point_cloud_from_fileobj(f)
+    303     return pc
+    304 
+
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/dist-packages/pypcd/pypcd.pyc in point_cloud_from_fileobj(f)
+    282         if ln.startswith('DATA'):
+    283             metadata = parse_header(header)
+--&gt; 284             dtype = _build_dtype(metadata)
+    285             break
+    286     if metadata['data'] == 'ascii':
+
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/dist-packages/pypcd/pypcd.pyc in _build_dtype(metadata)
+    208             fieldnames.extend(['%s_%04d' % (f, i) for i in xrange(c)])
+    209             typenames.extend([np_type]*c)
+--&gt; 210     dtype = np.dtype(zip(fieldnames, typenames))
+    211     return dtype
+    212 
+
+</code></pre></div></div>
+
+<div class="output_traceback_line highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ValueError: field '__0000' occurs more than once
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">./</span><span class="n">sample</span><span class="o">/</span><span class="n">lobby</span><span class="o">.</span><span class="n">pcd</span>
+</code></pre></div></div>
+
+<div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace/3D_People_Detection_Tracking
+
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cloud</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'count': [1, 1, 1, 1],
+ 'data': 'ascii',
+ 'fields': ['x', 'y', 'z', 'rgb'],
+ 'height': 1,
+ 'points': 2750,
+ 'size': [4, 4, 4, 4],
+ 'type': ['F', 'F', 'F', 'F'],
+ 'version': '0.7',
+ 'viewpoint': [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+ 'width': 2750}
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">cloud</span><span class="o">.</span><span class="n">pc_data</span><span class="p">[</span><span class="s">'rgb'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 0.  0.  0. ...,  0.  0.  0.]
+
+</code></pre></div></div>
+
+<h2 id="array로-변경">array로 변경</h2>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_cloud_data</span> <span class="o">=</span> <span class="n">cloud</span><span class="o">.</span><span class="n">pc_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we need numpy now</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="c"># convert the structured numpy array to a ndarray</span>
+<span class="n">new_cloud_data</span> <span class="o">=</span> <span class="n">cloud</span><span class="o">.</span><span class="n">pc_data</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cloud</span><span class="o">.</span><span class="n">pc_data</span><span class="o">.</span><span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_cloud_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2750
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_cloud_data</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[  1.00166738,   5.48460579,  -1.49390364,   0.        ],
+       [  1.01868272,   5.46968126,  -1.49079776,   0.        ],
+       [  1.03777063,   5.46609163,  -1.49079776,   0.        ],
+       ..., 
+       [ 18.39475441,  -6.8848362 ,  -1.71836269,   0.        ],
+       [ 18.24389076,  -6.90107012,  -1.70650947,   0.        ],
+       [ 18.23457718,  -6.97040224,  -1.70790386,   0.        ]], dtype=float32)
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">"/workspace/include"</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pcl_helper</span>
+
+<span class="n">n_random_color</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">random_color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_random_color</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">new_cloud_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="c">#labbels[0]</span>
+    <span class="n">new_cloud_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcl_helper</span><span class="o">.</span><span class="n">rgb_to_float</span><span class="p">(</span><span class="n">pcl_helper</span><span class="o">.</span><span class="n">random_color_gen</span><span class="p">())</span>
+    
+
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[  1.00166738,   5.48460579,  -1.49390364],
+       [  1.01868272,   5.46968126,  -1.49079776],
+       [  1.03777063,   5.46609163,  -1.49079776],
+       ..., 
+       [ 18.39475441,  -6.8848362 ,  -1.71836269],
+       [ 18.24389076,  -6.90107012,  -1.70650947],
+       [ 18.23457718,  -6.97040224,  -1.70790386]], dtype=float32)
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_cloud_data</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[  1.00166738e+00,   5.48460579e+00,  -1.49390364e+00,
+          1.91391502e-38],
+       [  1.01868272e+00,   5.46968126e+00,  -1.49079776e+00,
+          2.06848245e-38],
+       [  1.03777063e+00,   5.46609163e+00,  -1.49079776e+00,
+          6.83871486e-39],
+       ..., 
+       [  1.83947544e+01,  -6.88483620e+00,  -1.71836269e+00,
+          5.10465005e-40],
+       [  1.82438908e+01,  -6.90107012e+00,  -1.70650947e+00,
+          2.31961699e-39],
+       [  1.82345772e+01,  -6.97040224e+00,  -1.70790386e+00,
+          1.92780974e-39]], dtype=float32)
+</code></pre></div></div>
+
+<h2 id="after-decode-tool">After decode Tool</h2>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c"># Now visualize the points with matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># split the rgb column into three columns: red, green and blue</span>
+<span class="n">rgb_columns</span> <span class="o">=</span> <span class="n">pypcd</span><span class="o">.</span><span class="n">decode_rgb_from_pcl</span><span class="p">(</span><span class="n">cloud</span><span class="o">.</span><span class="n">pc_data</span><span class="p">[</span><span class="s">'rgb'</span><span class="p">])</span>
+
+<span class="c"># normalize the rgb values (they should be between [0, 1])</span>
+<span class="n">rgb_columns</span> <span class="o">=</span> <span class="p">(</span><span class="n">rgb_columns</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Plot again with color</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_cloud_data</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="o">-</span><span class="n">new_cloud_data</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">rgb_columns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'scaled'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="../images/features/pypcd_19_0.png" alt="png" /></p>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c"># Create a figure with a subplot with three axes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s">'3d'</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">rgb_columns</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="../images/features/pypcd_20_0.png" alt="png" /></p>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">type</span><span class="p">(</span><span class="n">rgb_columns</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>numpy.ndarray
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb_columns</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(2750, 3)
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb_columns</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtype('float64')
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb_columns</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 0.81568627,  0.40784314,  0.16470588],
+       [ 0.88235294,  0.23529412,  0.87843137],
+       [ 0.29019608,  0.46666667,  0.55686275],
+       ..., 
+       [ 0.01960784,  0.55686275,  0.97254902],
+       [ 0.09803922,  0.25882353,  0.14901961],
+       [ 0.07843137,  0.99215686,  0.95294118]])
+</code></pre></div></div>
+
+<h1 id="without-decode-tool">without decode Tool</h1>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb_columns1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pcl_helper</span><span class="o">.</span><span class="n">random_color_gen</span><span class="p">())</span>
+
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">type</span><span class="p">(</span><span class="n">rgb_columns1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>numpy.ndarray
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb_columns1</span> <span class="o">=</span> <span class="p">(</span><span class="n">rgb_columns1</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c"># Create a figure with a subplot with three axes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s">'3d'</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">rgb_columns1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="../images/features/pypcd_29_0.png" alt="png" /></p>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_cloud_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([  1.00166738,   1.01868272,   1.03777063, ...,  18.39475441,
+        18.24389076,  18.23457718], dtype=float32)
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb_columns</span>
+</code></pre></div></div>
+
+<div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 0.81568627,  0.40784314,  0.16470588],
+       [ 0.88235294,  0.23529412,  0.87843137],
+       [ 0.29019608,  0.46666667,  0.55686275],
+       ..., 
+       [ 0.01960784,  0.55686275,  0.97254902],
+       [ 0.09803922,  0.25882353,  0.14901961],
+       [ 0.07843137,  0.99215686,  0.95294118]])
+</code></pre></div></div>
+
+<div class="language-python input_area highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># And print some sample form the rgb column</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_cloud_data</span><span class="p">[:</span><span class="mi">100</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[  1.91391502e-38   2.06848245e-38   6.83871486e-39   1.80425767e-38
+    2.00014266e-38   2.20729788e-38   1.46291790e-38   1.87544321e-38
+    7.10961388e-39   5.17087962e-39   1.88927753e-38   8.62621118e-39
+    1.74704910e-38   8.19271249e-39   1.48454610e-38   2.20485345e-38
+    6.35897192e-39   3.21686980e-39   1.27655263e-38   1.59758577e-38
+    2.24054873e-39   2.12435880e-38   9.59862263e-39   1.64438717e-38
+    2.14944611e-39   2.20090781e-38   1.72197553e-38   1.82830199e-38
+    1.33351051e-38   1.54079913e-39   1.32759885e-38   1.71286190e-38
+    8.82327438e-39   1.80263455e-39   2.21174868e-38   1.66724557e-38
+    1.54759823e-39   1.31544511e-38   1.47332997e-38   2.08111109e-38
+    2.03578525e-38   2.20660633e-38   1.09654996e-38   1.43230289e-38
+    1.60405935e-39   1.42220444e-38   1.13297994e-38   1.36603143e-38
+    2.30696046e-38   9.44780228e-39   1.64677541e-38   1.88774325e-38
+    2.19971461e-38   5.13602792e-39   9.96597582e-39   8.00565316e-39
+    4.61137057e-39   3.29052905e-41   2.21679882e-38   1.32062487e-38
+    6.86011268e-39   2.01598350e-38   6.88236811e-39   1.77541306e-38
+    1.75465619e-38   2.22309836e-38   1.17961473e-38   2.32099615e-38
+    5.39106704e-39   4.45478387e-40   2.77276188e-39   1.46311408e-38
+    2.36616252e-39   1.48855816e-38   2.09603001e-38   2.00806715e-38
+    1.00414680e-38   1.57212025e-38   2.14299103e-38   1.02275408e-38
+    1.99090320e-39   3.09113409e-39   7.85733553e-39   1.48913606e-38
+    1.15186664e-38   1.34572297e-39   1.20232179e-38   1.62091893e-38
+    6.66108486e-39   1.89147771e-38   2.08793625e-38   2.33037854e-38
+    1.30877213e-38   2.35087842e-38   2.24140632e-38   5.56645216e-39
+    3.06441553e-40   1.48294372e-38   8.36631235e-40   3.40540750e-39]]
+
+</code></pre></div></div>
+
+<h2 id="2d-시각화">2D 시각화</h2>
+
+
+          <nav class="c-page__nav">
+  
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/PCL_To_All/features/open3d">
+      〈 <span class="u-margin-right-tiny"></span> Open3D (Python)
+    </a>
+  
+
+  
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/PCL_To_All/guide/01_overview">
+      환경구성 <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+        </div>
+      </main>
+    </div>
+
+  </body>
+</html>
