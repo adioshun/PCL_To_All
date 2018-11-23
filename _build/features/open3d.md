@@ -7,13 +7,13 @@ prev_page:
   url: /features/python-pcl
   title: 'PCL (Python)'
 next_page:
-  url: /guide/01_overview
-  title: '환경구성'
+  url: /features/pypcd
+  title: 'PyPCD (Python)'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 
 ## Open3D
-- 본 챕터에서는 Open3D 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다. 
+- 본 챕터에서는 [Open3D](http://www.open3d.org/) 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다. 
 
 
 

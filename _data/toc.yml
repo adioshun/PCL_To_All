@@ -26,6 +26,9 @@
   - title: Open3D (Python)
     url: /features/open3d
     not_numbered: true
+  - title: PyPCD (Python)
+    url: /features/pypcd
+    not_numbered: true
 
 - title: 환경구성
   url: /guide/01_overview
@@ -40,77 +43,55 @@
   - title: ROS
     url: /guide/04_ros
     not_numbered: true
-  - title: 시각화
-    url: /guide/05_vis
-    not_numbered: true
+
 
 
 - divider: true
 - header: People Detection (Basic)
 
 - title: Down Sampling
-  url: /01/what-is-data-science
+  url: /01/intro_downsampling
   sections:
   - title: Voxelization
-    url: /01/1/intro
+    url: /01/1/voxelization
 
 
 - title: RoI Filtering
-  url: /02/causality-and-experiments
+  url: /02/intro_filtering
   sections:
-  - title: John Snow and the Broad Street Pump
-    url: /02/1/observation-and-visualization-john-snow-and-the-broad-street-pump
-  - title: "Snow\u2019s \u201CGrand Experiment\u201D"
-    url: /02/2/snow-s-grand-experiment
-  - title: Establishing Causality
-    url: /02/3/establishing-causality
-  - title: Randomization
-    url: /02/4/randomization
-  - title: Endnote
-    url: /02/5/endnote
+  - title: PassThrough filter
+    url: /02/1/PassThrough_filter
+
 
 - title: Noise Filtering
-  url: /03/programming-in-python
+  url: /03/intro_noise
   sections:
   - title: Expressions
     url: /03/1/Expressions
-  - title: Names
-    url: /03/2/Names
-  - title: Call Expressions
-    url: /03/3/Calls
-  - title: Introduction to Tables
-    url: /03/4/Introduction_to_Tables
+
 
 - title: Plane Removal
-  url: /04/Types
+  url: /04/intro_Plane_removal
   sections:
   - title: Numbers
     url: /04/1/Numbers
-  - title: Strings
-    url: /04/2/Strings
-  - title: Comparisons
-    url: /04/3/Comparison
+
 
 - divider: true
 - header: People Detection (Intermediate)
 
-- title: Background Removal
-  url: /01/what-is-data-science
-  sections:
-  - title: Introduction
-    url: /01/1/intro
-  - title: Why Data Science?
-    url: /01/2/why-data-science
-  - title: Plotting the Classics
-    url: /01/3/Plotting_the_Classics
-    subsections:
-    - title: Subsection Demo 1
-      url: /01/3/subsection/subsections
-    - title: Subsection Demo 2
-      url: /01/3/subsection/subsectiontwo
+
+
 
 - divider: true
 - header: etc.
+
+- title: 시각화
+  url: /visualization/intro_visualization
+  not_numbered: true
+  sections:
+  - title: Jupyter 기반
+    url: /visualization/viz_jupyter
 
 - title: References
   url: /references/references

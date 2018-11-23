@@ -4,11 +4,11 @@ redirect_from:
 interact_link: content/03/1/Expressions.ipynb
 title: 'Expressions'
 prev_page:
-  url: /03/programming-in-python
+  url: /03/intro_noise
   title: 'Noise Filtering'
 next_page:
-  url: /03/2/Names
-  title: 'Names'
+  url: /04/intro_Plane_removal
+  title: 'Plane Removal'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

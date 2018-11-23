@@ -15,6 +15,8 @@ Point cloud를 처리를 위한 라이브러리로는 PCL, PCL-python, Open3D, p
 - OS : Ubuntu 16.4 with ROS
 - 센서 : Velodyne Puck (16ch Lidar)
 
+> [PCL-To-All Docker](https://hub.docker.com/r/adioshun/pcl_to_all/) : Ubuntu 16, ROS, PCL-python, Open3D, Jupyter, etc. 설치
+
 ## Mini Project
 
 진행은 Lidar로 수집되는 점군 데이터에서 사람을 추출 하는 3D People Detection 구현을 목표로 하고 있습니다.

@@ -4,11 +4,11 @@ redirect_from:
 interact_link: content/04/1/Numbers.ipynb
 title: 'Numbers'
 prev_page:
-  url: /04/Types
+  url: /04/intro_Plane_removal
   title: 'Plane Removal'
 next_page:
-  url: /04/2/Strings
-  title: 'Strings'
+  url: /visualization/intro_visualization
+  title: '시각화'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

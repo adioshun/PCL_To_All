@@ -13,7 +13,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 ---
 
 ## Python-PCL
-- 본 챕터에서는 PCL의 Python버젼인 Python-PCL의 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다. 
+- 본 챕터에서는 PCL의 Python버젼인 [Python-PCL](http://strawlab.github.io/python-pcl/)의 기본적인 파일 입력, Numpy변환, 저장 방법에 대하여 정리 하였습니다. 
 
 
 
@@ -107,8 +107,7 @@ print(pc)
 
 {:.input_area}
 ```python
-pc = pcl.PointCloud()
-pc.from_file("./sample/lobby.pcd") # Deprecated; use pcl.load instead.
+pc = pcl.load("./sample/lobby.pcd") # "pc.from_file" Deprecated
 print(pc)
 ```
 

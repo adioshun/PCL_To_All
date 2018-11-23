@@ -3,8 +3,8 @@ redirect_from:
   - "/references/references"
 title: 'References'
 prev_page:
-  url: /01/3/subsection/subsectiontwo
-  title: 'Subsection Demo 2'
+  url: /visualization/viz_jupyter
+  title: 'Jupyter 기반'
 next_page:
   url: 
   title: ''

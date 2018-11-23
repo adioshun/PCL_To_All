@@ -3,8 +3,8 @@ redirect_from:
   - "/guide/01-overview"
 title: '환경구성'
 prev_page:
-  url: /features/open3d
-  title: 'Open3D (Python)'
+  url: /features/pypcd
+  title: 'PyPCD (Python)'
 next_page:
   url: /guide/02_ubuntu
   title: 'Ubuntu'
