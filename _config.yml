@@ -49,6 +49,11 @@ use_jupyterlab           : false  # If 'true', interact links will use JupyterLa
 interact_text            : "Interact"  # The text that interact buttons will contain.
 
 #######################################################################################
+
+disqus_url : http://disqus.com/by/hunjunglim
+disqus_id : pcl-to-all
+
+
 # Jekyll build settings
 
 # Site settings (only modify if you know what you're doing)

@@ -1,10 +1,10 @@
 ---
 redirect_from:
   - "/02/causality-and-experiments"
-title: 'Causality and Experiments'
+title: 'RoI Filtering'
 prev_page:
-  url: /01/3/subsection/subsectiontwo
-  title: 'Subsection Demo 2'
+  url: /01/1/intro
+  title: 'Voxelization'
 next_page:
   url: /02/1/observation-and-visualization-john-snow-and-the-broad-street-pump
   title: 'John Snow and the Broad Street Pump'

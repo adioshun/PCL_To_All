@@ -8,7 +8,7 @@ prev_page:
   title: 'Call Expressions'
 next_page:
   url: /04/Types
-  title: 'Data Types'
+  title: 'Plane Removal'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

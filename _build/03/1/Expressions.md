@@ -5,7 +5,7 @@ interact_link: content/03/1/Expressions.ipynb
 title: 'Expressions'
 prev_page:
   url: /03/programming-in-python
-  title: 'Programming in Python'
+  title: 'Noise Filtering'
 next_page:
   url: /03/2/Names
   title: 'Names'

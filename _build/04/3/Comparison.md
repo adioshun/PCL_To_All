@@ -8,7 +8,7 @@ prev_page:
   title: 'Strings'
 next_page:
   url: /01/what-is-data-science
-  title: 'Data Science'
+  title: 'Background Removal'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

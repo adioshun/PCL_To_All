@@ -4,7 +4,7 @@ redirect_from:
 title: 'John Snow and the Broad Street Pump'
 prev_page:
   url: /02/causality-and-experiments
-  title: 'Causality and Experiments'
+  title: 'RoI Filtering'
 next_page:
   url: /02/2/snow-s-grand-experiment
   title: 'Snow’s “Grand Experiment”'

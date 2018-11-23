@@ -7,7 +7,7 @@ prev_page:
   title: 'Randomization'
 next_page:
   url: /03/programming-in-python
-  title: 'Programming in Python'
+  title: 'Noise Filtering'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 Endnote

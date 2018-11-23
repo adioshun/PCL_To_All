@@ -48,22 +48,14 @@
 - divider: true
 - header: People Detection (Basic)
 
-- title: Data Science
+- title: Down Sampling
   url: /01/what-is-data-science
   sections:
-  - title: Introduction
+  - title: Voxelization
     url: /01/1/intro
-  - title: Why Data Science?
-    url: /01/2/why-data-science
-  - title: Plotting the Classics
-    url: /01/3/Plotting_the_Classics
-    subsections:
-    - title: Subsection Demo 1
-      url: /01/3/subsection/subsections
-    - title: Subsection Demo 2
-      url: /01/3/subsection/subsectiontwo
 
-- title: Causality and Experiments
+
+- title: RoI Filtering
   url: /02/causality-and-experiments
   sections:
   - title: John Snow and the Broad Street Pump
@@ -77,7 +69,7 @@
   - title: Endnote
     url: /02/5/endnote
 
-- title: Programming in Python
+- title: Noise Filtering
   url: /03/programming-in-python
   sections:
   - title: Expressions
@@ -89,7 +81,7 @@
   - title: Introduction to Tables
     url: /03/4/Introduction_to_Tables
 
-- title: Data Types
+- title: Plane Removal
   url: /04/Types
   sections:
   - title: Numbers
@@ -102,7 +94,7 @@
 - divider: true
 - header: People Detection (Intermediate)
 
-- title: Data Science
+- title: Background Removal
   url: /01/what-is-data-science
   sections:
   - title: Introduction
@@ -120,14 +112,6 @@
 - divider: true
 - header: etc.
 
-- title: 참고 자료
+- title: References
   url: /references/references
-  not_numbered: true
-
-- title: 의견 / QnA
-  url: https://github.com/hunjung-lim/3D_People_Detection_Tracking/issues
-  not_numbered: true
-
-- title: Github
-  url: https://github.com/hunjung-lim/3D_People_Detection_Tracking
   not_numbered: true

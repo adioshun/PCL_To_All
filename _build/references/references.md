@@ -1,13 +1,13 @@
 ---
 redirect_from:
   - "/references/references"
-title: '참고 자료'
+title: 'References'
 prev_page:
   url: /01/3/subsection/subsectiontwo
   title: 'Subsection Demo 2'
 next_page:
-  url: /https://github.com/hunjung-lim/3D_People_Detection_Tracking/issues
-  title: '의견 / QnA'
+  url: 
+  title: ''
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 ## References

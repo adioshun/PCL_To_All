@@ -5,7 +5,7 @@ interact_link: content/04/1/Numbers.ipynb
 title: 'Numbers'
 prev_page:
   url: /04/Types
-  title: 'Data Types'
+  title: 'Plane Removal'
 next_page:
   url: /04/2/Strings
   title: 'Strings'

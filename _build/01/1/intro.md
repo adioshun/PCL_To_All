@@ -1,13 +1,13 @@
 ---
 redirect_from:
   - "/01/1/intro"
-title: 'Introduction'
+title: 'Voxelization'
 prev_page:
   url: /01/what-is-data-science
-  title: 'Data Science'
+  title: 'Down Sampling'
 next_page:
-  url: /01/2/why-data-science
-  title: 'Why Data Science?'
+  url: /02/causality-and-experiments
+  title: 'RoI Filtering'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 Chapter 1: Introduction

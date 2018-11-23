@@ -7,7 +7,7 @@ prev_page:
   title: 'ROS'
 next_page:
   url: /01/what-is-data-science
-  title: 'Data Science'
+  title: 'Down Sampling'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 https://adioshun.gitbooks.io/ros_autoware/content/rospcl.html
